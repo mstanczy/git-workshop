@@ -197,6 +197,7 @@ drwxr-xr-x@ 9 mstanczy1  staff 288 May 25 18:17 files
 ```
 
 2. Configure difftool:
+
 On Mac/Linux:
 ```
 git config diff.tool opendiff
@@ -209,7 +210,7 @@ git config --global difftool.prompt false
 ```
 
 3. Open jumbotron.html in your favorite text editor. Open the same file also in your favorite browser.
-4. Update line 80 of the code - replace 'btn-default' with 'btn-primary'.
+4. Update line 80 of the code - replace '*btn-default*' with '*btn-primary*'.
 5. Save the file and refresh the page in the browser. Notice the color of the button in Section 1 is different.
 6. display diffs in slightly different format 
 ```
@@ -226,7 +227,7 @@ Confirm the new commit was added
 git log
 ```
 
-8. Update line 85 - replace 'btn-default' with 'btn-info'
+8. Update line 85 - replace '*btn-default*' with '*btn-info*'
 9. Save the file and refresh the page in the browser. Notice the color of the button in Section 2 is different.
 10. display diffs using preconfigured difftool
 ```
@@ -241,7 +242,7 @@ git commit -am "changed button in section 2"
  git log
  ```
  
-12. Update line 90 - replace 'btn-default' with 'btn-warning'
+12. Update line 90 - replace '*btn-default*' with '*btn-warning*'
 
 13. Save the file and refresh the page in the browser. Notice the color of the button in Section 3 is different.
 14.  commit the changes and confirm the new commit was added
