@@ -11,6 +11,7 @@
 
 [4. Remote Repository](https://github.com/mstanczy/git-workshop#4-remote-repository)
  
+-----
 ### 0. Prerequisites
 
 #### 0.1 Install git
@@ -181,7 +182,7 @@ Check if got attached to the commit
 git status
 ```
 
-
+-----
 ### 2. Branches
 
 1. Clone the test repository into your local folder:
@@ -453,7 +454,7 @@ git revert <bad commit>
 ```
 git history
 ```
-
+-----
 ### 3. Merges and Conflicts
 
 Let's merge some of our changes to the main branch.
@@ -573,7 +574,7 @@ Display git history and notice all the commits are still there, just the "footer
 
 
 
-
+-----
 ### 4. Remote Repository
 
 *Origin* is the default name of the remote repo when you do *git clone*, the same way as  *master* is the default name of the main branch
