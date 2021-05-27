@@ -139,11 +139,11 @@ git status
  ``` 
 git diff
 ```
-19. You realized that test_file2.txt is added by mistake and shouldn't be committed. Let's unstage it  "git reset [file]" command.
+19. You realized that test_file2.txt is added by mistake and shouldn't be committed. Let's unstage it using ```git reset [file]``` command.
  ``` 
 git reset test_file2.txt
 ```
- Confirm the file is no longer in Index
+ Confirm the file is no longer listed in Index
  ```
  git status
  ```
@@ -156,7 +156,7 @@ git commit -am  "added line2 in test_file"
  git log
  ```
 
-22. Let's see what is the diff between the last two commits.  Issue "git diff <sha_nr1> <sha_nr2>" where each parameter includes the first 6 digits of the hash of the last 2 commits. 
+22. Let's see what is the diff between the last two commits.  Issue ```git diff <sha_nr1> <sha_nr2>``` where each parameter includes the first 6 digits of the hash of the last 2 commits. 
 
 ```
 git diff <sha_nr1> <sha_nr2>
@@ -265,15 +265,15 @@ git reset last_good_commit
 ```
 git log
 ```
-18. display 'git status' and notice that changes to 'jumbotron.html' are now in the Working Directory
+18. display ```git status``` and notice that changes to 'jumbotron.html' are now in the Working Directory
 ```
 git status
 ```
-19. display 'git diff' and verify all 3 changes are included
+19. display ```git diff``` and verify all 3 changes are included
 ```
 git diff
 ```
-20. Create a new branch with "git checkout -b buttons". 
+20. Create a new branch and switch to it automatically. 
 ```
 git checkout -b buttons
 ```
@@ -282,17 +282,17 @@ Display 'git log' and notice that both branches are pointing to the same commit.
 ```
 git log
 ```
-Issue "git status" to confirm our current active branch is "buttons"
+Issue ```git status``` to confirm our current active branch is "buttons"
 ```
 git status
 ```
 
 
-21. Use "git diff" to see which changes are currently in the working directory
+21. Display diffs and check which changes are currently in the working directory
 ```
 git diff
 ```
- If we stage changes in a standard way they will be all added into a single commit. Let's say we want to split those changes into 3 commits, the same way it was done before. For this purpose we can selectively stage changes per hunk. This operation is called staging patches.
+ If we stage changes in a standard way they will be all added into a single commit. Let's say we want to split those changes into 3 commits, the same way it was done before. For this purpose we can selectively stage changes per hunk. This operation is called *staging patches*.
 
 ```
 git add -p
@@ -323,7 +323,7 @@ git diff --cached
 ```
 git commit -m "changed button in section 1"
 ```
-20. display "git log" - our HEAD is now pointing to the most recent commit in "buttons" branch; the master branch is still pointing to the 'last_good_commit'
+20. display the list of commits - our HEAD is now pointing to the most recent commit in "buttons" branch; the master branch is still pointing to the 'last_good_commit'
 ```
 git log
 ```
@@ -344,7 +344,7 @@ git commit -m "changed button in section 2"
 ```
  git commit -am "changed button in section 3"
  ```
-24. display the history: "git log". The 'buttons' branch is now 3 commits ahead of 'master'. 
+24. display the history of commits. The 'buttons' branch is now 3 commits ahead of 'master'. 
 ``` 
 git log
 ```
@@ -383,7 +383,7 @@ Notice that HEAD points to the commit you referred to but the subsequent commits
 git commit -am "updated footer to 2021"
 ```
 
-31. display "git log" and notice that HEAD points to the new commit but still "buttons" branch isn't displayed.
+31. display the list of commits and notice that HEAD points to the new commit but still the "buttons" branch isn't displayed.
 ```
 git log
 ```
@@ -403,7 +403,7 @@ Git branch footer <sha>
 ```
 where sha refers to the SHA ID for the commit called "updated footer to 2021"
 
-30. Notice our active branch is now "buttons". Issue "git history" or "gitk --all" to visualize the status of all branches. 
+30. Notice our active branch is now "buttons". Visualize the status of all branches:
 ```
 git history
 ```
@@ -413,14 +413,14 @@ gitk --all
 ```
 
 31. Refresh the browser tab and confirm all buttons have updated colors.
-32. Let's see how git helps restore deleted files. Remove bootstrap.css file from the /files folder and confirm the file is no longer there:
+32. Let's see how git helps restore deleted files. Remove *bootstrap.css* file from the */files* folder and confirm the file is no longer there:
 ```
 rm files/bootstrap.css
 
 ls files/bootstrap.css
 ```
 33. Refresh the browser tab and notice the page formatting is now broken.
-34. Issue "git status" and notice that git reports changes in the tracked files.
+34. Issue ```git status``` and notice that git detected changes in the tracked files.
 ```
 git status
 ```
@@ -442,12 +442,12 @@ How do we know which commit we should refer to?  We can display "git log" and fi
 ```
 git checkout <bad commit>~1
 ```
-39. Refresh the browser tab.  The page should look good. At this point your local version of the project includes the deleted file. You can start a new branch from here but we decided to go back to the active branch and revert the bad commit.
+39. Refresh the browser tab. The page should look OK. At this point your local version of the project includes the deleted file. You can start a new branch from here if that fits your needs but we decide to go back to the active branch and revert the bad commit.
 ```
 git checkout -
 ```
 
-40. Let's restore the deleted file. This is possible thanks to the way git tracks all changes in its database. We can use "git revert" command which effectively creates a new commit with reverted changes (you will be prompted to provide the commit message)
+40. Let's restore the deleted file. This is possible thanks to the way git tracks all changes in its database. We can use ```git revert``` command which effectively creates a new commit with reverted changes (you will be prompted to provide the commit message)
 ```
 git revert <bad commit>
 ```  
@@ -466,13 +466,13 @@ git checkout master
 ```  
 Refresh the browser page, the buttons should go back to their original state.
 
-2. in jumbotron.html update line 56. Change "Sign in!" into "Login".
+2. in *jumbotron.html* update the line 56. Change "Sign in!" into "Login".
 3. Commit changes
 ```
  git commit -am "Login text"
  ```
 
-4. display 'git history' to view the status of branches. Notice that there's one new commit on the main branch.
+4. View the status of branches. Notice that there's one new commit on the main branch.
 ```
 git history
 ```
@@ -482,10 +482,10 @@ git history
 git merge buttons
 ```
 
-  Since the target branch has it's own commits added after the buttons branch was created git will apply a **merge commit** and you will be prompted to provide the commit message (git uses the tool you configured as core.editor) 
-If master branch didn't have it's own commit then git would have applied the fast forward merge (no commit merge required).
+Since the target branch has it's own commits added after the "buttons" branch was created git will apply a **merge commit** and you will be prompted to provide the commit message (git uses the tool you configured as core.editor) 
+If "master" branch didn't have it's own commit then git would have applied the fast forward merge (no commit merge required).
 
-6. display 'git history' to see the updated graph
+6. display the updated graph of commits
 ```
 git history
 ```
@@ -500,7 +500,7 @@ Let's see if we're able to revert the merge commit at this point.
 ```
 git reset --hard ORIG_HEAD
 ```
-7.  display "git history" and notice that our recent merge was reverted back and we're again in the state where footer and master branches are separated.
+7.  display the list of commits and notice that our recent merge was reverted back and we're again in the state where "footer" and "master" branches are separated.
 ```
 git history
 ```
@@ -509,12 +509,12 @@ git history
 ```
 git rebase buttons
 ```
-9. display "git history" and notice that commits from buttons branch were rewinded and then re-applied on the master branch instead of creating a merge commit. 
+9. display ```git history``` and notice that commits from buttons branch were rewinded and then re-applied on the master branch instead of creating a merge commit. 
 ```
 git history
 ``` 
 
-10. update line 97 and change '2016' into '2020'. Commit changes into master 
+10. update line 97 and change '2016' into '2020'. Commit changes into "master" 
 ```
 git commit -am "updated footer to 2020"
 ```
@@ -571,8 +571,7 @@ git history
 ```
 git branch -d footer
 ```
-Display git history and notice all the commits are still there, just the "footer" branch isn't listed anymore.
-
+Display ```git history``` and notice all the commits are still there, just the "footer" branch isn't listed anymore.
 
 
 -----
