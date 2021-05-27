@@ -2,9 +2,13 @@
 
 ### Table of Contents
 [0. Prerequisites](https://github.com/mstanczy/git-workshop#0-prerequisites)
+
 [1. Working Directory, Index and Commits](https://github.com/mstanczy/git-workshop#1-working-directory-index-and-commits)
+
 [2. Branches](https://github.com/mstanczy/git-workshop#2-branches)
+
 [3. Merges and Conflicts](https://github.com/mstanczy/git-workshop#3-merges-and-conflicts)
+
 [4. Remote Repository](https://github.com/mstanczy/git-workshop#4-remote-repository)
  
 ### 0. Prerequisites
