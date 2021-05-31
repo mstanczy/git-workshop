@@ -135,11 +135,19 @@ git add .
 git status
 ```
 
-18. Issue "git diff" and notice there's no output produced... why?
+19. Issue "git diff" and notice there's no output produced... why?
  ``` 
 git diff
 ```
-19. You realized that test_file2.txt is added by mistake and shouldn't be committed. Let's unstage it using ```git reset [file]``` command.
+
+20. Issue ```git diff --cached``` and observe the difference
+
+```
+git diff --cached
+```
+
+
+21. You realized that test_file2.txt is added by mistake and shouldn't be committed. Let's unstage it using ```git reset [file]``` command.
  ``` 
 git reset test_file2.txt
 ```
@@ -168,18 +176,27 @@ git diff <sha_nr1> <sha_nr2>
 ```
 What changed?  Why?
 
-24. clean the working directory
+24. Instead of referring to SHA IDs let's refer to HEAD and its parent commit (HEAD^):
+
+```
+git diff HEAD^ HEAD
+```
+
+Notice that we're still comparing the same two commits as before.
+
+
+25. clean up the working directory
  ```
 git clean -f
  ```
-25. add a tag to the most recent commit:
+26. add a tag to the most recent commit:
  ```
  git tag last_good_commit
  ```
  
-Check if got attached to the commit
+Check if the tag got attached to the commit
 ```
-git status
+git log
 ```
 
 -----
@@ -193,12 +210,12 @@ cat .gitignore
 27.  commit changes
 ``` 
 git add .gitignore
-git commit m "added .gitignore with /static"
+git commit -m "added .gitignore with /static"
 git status
 ```
 28. create 2 new folders named 'static' and static2,  add a new file into each folder 
 ```
-mdkir static static2
+mkdir static static2
 echo "some text" >> static/newfile.txt
 echo "some text" >> static2/newfile.txt
 ls -l static static2
