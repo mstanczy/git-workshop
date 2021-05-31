@@ -540,25 +540,30 @@ git history
 git merge buttons
 ```
 
-Since the target branch has it's own commits added after the "buttons" branch was created git will apply a **merge commit** and you will be prompted to provide the commit message (git uses the tool you configured as core.editor) 
-If "master" branch didn't have it's own commit then git would have applied the fast forward merge (no commit merge required).
+Since the target branch has it's own commit added after the "buttons" branch was created git will apply a **merge commit** and you will be prompted to provide the commit message (git uses the tool you configured as core.editor) 
+If "master" branch didn't have it's own commit then git would have applied the fast forward merge (with no merge commit required).
 
 6. display the updated graph of commits
 ```
 git history
 ```
 
-7.  Git automatically keeps the state of the repository from before each risky operation (e.g. merge) in the commit tagged as **ORIG_HEAD**. By default, the  .orig file is created with the original conflicts (as a backup)
+7.  Git automatically keeps the state of the repository from before each risky operation (e.g. merge) in the commit tagged as **ORIG_HEAD**. By default, the  .orig file is created with the original conflicts (as a backup). Where is this information stored? As everyting else in git it's in one of the files that constitute git database. In this case the SHA1 ID of the commit that corresponds to ORIG_HEAD is stored in .git/ORIG_HEAD text file: 
+
+```
+ls -l .git
+cat .git/ORIG_HEAD
+```
 
 Let's see if we're able to revert the merge commit at this point.
 
-> *git reset --hard [commit]* allows to rewind HEAD and Working Directory to a specific commit. In our case, we'll refer to the
+> "*git reset --hard [commit]*" allows to rewind HEAD and Working Directory to a specific commit. In our case, we'll refer to the
 > ORIG_HEAD commit, which is our safeguard.
 
 ```
 git reset --hard ORIG_HEAD
 ```
-7.  display the list of commits and notice that our recent merge was reverted back and we're again in the state where "footer" and "master" branches are separated.
+7.  display the list of commits and notice that our recent merge was reverted back and we're again in the state where "buttons" and "master" branches are separated.
 ```
 git history
 ```
@@ -572,11 +577,11 @@ git rebase buttons
 git history
 ``` 
 
-10. update line 97 and change '2016' into '2020'. Commit changes into "master" 
+10. Let's try create some conflict. Update line 97 and change '2016' into '2020'. Save the updated file and commit changes into "master" 
 ```
 git commit -am "updated footer to 2020"
 ```
-11. let's now try merge the 'footer' branch into 'master'
+11. Now, let's try merge the 'footer' branch into 'master'
 ```
  git merge footer
  ```
@@ -586,7 +591,7 @@ git commit -am "updated footer to 2020"
 12. issue "git status" to see which file has a conflict. 
 
 
-> An ongoing merge that results in conflicts can be cancelled with "*git merge --abort*" 
+> An ongoing merge that results in conflicts can be cancelled with "*git merge --abort*". In our case we will proceed with resolving the conflict instead of aborting the merge.
 
 14. issue "git diff" to see which lines are conflicting
 ```
@@ -604,7 +609,7 @@ HEAD commit (on **master** branch) includes '2020' whereas the most recent commi
 >>>>>>> footer
 ```
 
-You as the project admin have to make a call and remove the bad line as well as separators added by git
+You as the project admin have to make a call and remove the bad line as well as separators added by git. You decided that "© 2020 Company, Inc." is the correct one.
 
 14. Edit the jumbotron.html file and remove line 97, 99, 100 ad 101:
 ```
@@ -614,7 +619,7 @@ You as the project admin have to make a call and remove the bad line as well as 
 100        <p>© 2021 Company, Inc.</p>
 101 >>>>>>> footer
 ```
-15. save the changes and commit 
+15. save the changes and issue commit 
 ```
 commit -am "resolved conflict in the footer"
 ```
@@ -624,7 +629,7 @@ commit -am "resolved conflict in the footer"
 git history
 ```
 
-17. remote branch 'footer' which is now obsolete and we can delete it
+17. branch 'footer' is now obsolete and we can delete it. Effectively, we will just remove a pointer without affecting any commits.
 
 ```
 git branch -d footer
