@@ -183,6 +183,35 @@ git status
 ```
 
 -----
+
+#### Optional tasks:
+26. create .gitignore file and list /static folder there:
+```
+echo "/static" >> .gitignore
+cat .gitignore
+```
+27.  commit changes
+``` 
+git add .gitignore
+git commit m "added .gitignore with /static"
+git status
+```
+28. create 2 new folders named 'static' and static2,  add a new file into each folder 
+```
+mdkir static static2
+echo "some text" >> static/newfile.txt
+echo "some text" >> static2/newfile.txt
+ls -l static static2
+```
+29.  display ```git status``` and notice only static2 is listed as a folder that can be added to Index and then committed.
+
+30.  Clean up by removing the recently added folders from working directory
+```
+rm -rf static static2
+```
+
+
+-----
 ### 2. Branches
 
 1. Clone the test repository into your local folder:
