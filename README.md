@@ -646,7 +646,7 @@ Display ```git history``` and notice all the commits are still there, just the "
 ```
  git remote -v
 ```
-2. add a new remote repo on your gitlab account
+2. Configure a new remote repo on your gitlab account
 ```
 git remote add newrepo https://gitlab-sjc.cisco.com/<username>/newrepo
 ```
@@ -655,15 +655,15 @@ git remote add newrepo https://gitlab-sjc.cisco.com/<username>/newrepo
 ```
  git remote -v
 ```
-Go to your gitlab account and notice that a new project has been created automatically.
 
-
-4. The newly created remote repository is not linked to any local repository yet. In order to be able to push local changes to the remote repo such association (tracking branch) needs to be created. 
+4. The newly configured remote repository is not linked to any local repository yet. In order to be able to push local changes to the remote repo such association (tracking branch) needs to be created. 
 The local branch will be tracking the remote branch on the remote server. The tracking branch is also referred to as upstream branch - that's why we use -u option (upstream) in git command:
 ```
 git push newrepo -u master
 ```
 Branch 'master' is now set up to track remote branch 'master' from 'newrepo'.
+
+Go to your gitlab account and notice that a new project has been created automatically.
 
 5. display the list of branches (local and remote):
 ```
