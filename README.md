@@ -680,7 +680,6 @@ git history
 8. Let's simulate a scenario where another developer commits changes to the same branch on the remote repo.
 **On the gitlab account** edit the *jumbotron.html* file (pay attention to do it on the remote repo).
 
-[screenshot]
  
 In line 65 change "Hello, world!" into "Hello, Programmability Makers!".  
 Add a commit message "*Hello message updated on remote branch*". Commit changes.
@@ -702,7 +701,7 @@ git pull
 git log
 ```
 
-13. Make another edit on the remote branch (on gitlab account). Edit line 65 and change "Hello, Programmability Makers!" into "Welcome" 
+13. Make another edit on the remote branch (on gitlab account). Edit line 65 and change "Hello, Programmability Makers!" into "Welcome".  Add a commit message "*Updated welcome message*". Commit changes.
 
 14. This time instead of pulling changes we will use **fetch** command.
 ```
