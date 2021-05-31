@@ -189,15 +189,6 @@ Notice that we're still comparing the same two commits as before.
  ```
 git clean -f
  ```
-26. add a tag to the most recent commit:
- ```
- git tag last_good_commit
- ```
- 
-Check if the tag got attached to the commit
-```
-git log
-```
 
 -----
 
@@ -231,7 +222,7 @@ rm -rf static static2
 -----
 ### 2. Branches
 
-1. Clone the test repository into your local folder:
+0. Clone the test repository into your local folder:
 ```
 git clone https://gitlab-sjc.cisco.com/mstanczy/git_workshop
 ```
@@ -242,7 +233,7 @@ drwxr-xr-x@ 9 mstanczy1  staff 288 May 25 18:17 files
 -rw-r--r--  1 mstanczy1  staff  4626 May 26 14:49 jumbotron.html
 ```
 
-2. Configure difftool:
+1. Configure difftool:
 
 On Mac/Linux:
 ```
@@ -255,10 +246,20 @@ git config diff.tool winmerge
 git config --global difftool.prompt false
 ```
 
+2. add a tag to the most recent commit:
+ ```
+ git tag last_good_commit
+ ```
+ 
+Check if the tag got attached to the commit
+```
+git log
+```
+
 3. Open jumbotron.html in your favorite text editor. Open the same file also in your favorite browser.
 4. Update line 80 of the code - replace '*btn-default*' with '*btn-primary*'.
 5. Save the file and refresh the page in the browser. Notice the color of the button in Section 1 is different.
-6. display diffs in slightly different format 
+6. display diffs in a slightly different format 
 ```
 git diff --word-diff
 ```
@@ -266,7 +267,7 @@ Changes between the commited and staged versions of the file are presented.
 
 7. commit the changes
 ```
-"git commit -am "changed button in section 1"
+git commit -am "changed button in section 1"
  ```
 Confirm the new commit was added  
 ```
@@ -279,6 +280,8 @@ git log
 ```
 git difftool
 ```
+Close the FileMerge / WinMerge window to get back the prompt in the Terminal.
+
 11. commit the changes
 ```
 git commit -am "changed button in section 2"
@@ -301,6 +304,8 @@ git log
 ```
 gitk
 ```
+
+Close the gitk window to get back the prompt in the Terminal.
 
 16. You realized that you were committing to the main branch instead of creating a separate branch. Rewind HEAD to the "last_good_commit"
 ```
@@ -398,7 +403,7 @@ git log
 ```
 git log --oneline --graph --all
 ```
-26. Configure new alias for a simple reference to this view
+26. Configure a new alias for a simple reference to this view
 ```
 git config --global alias.history “log --oneline --graph --all” 
 ```
@@ -406,11 +411,11 @@ From now on you can use the new alias instead the long command:
 ```
 git history
 ```
-26. Let's say we want to view the version of the code after one of the previous commits. Let's try to go back to the commit "changed button in section 1"
+26. Let's say we want to view the version of the code after one of the previous commits. Let's try to go back to the commit "changed button in section 1" - this is two commits before HEAD
 ```
-git checkout <sha>  
+git checkout HEAD~2  
 ```
-where <*sha*> includes the first 6 digits of the SHA ID
+This way of referencing commits allows us to navigate back in the history of commits.
 
 Notice that git warned you that you're moving into "detached HEAD" state.
 
@@ -420,6 +425,12 @@ git log
 git status
 ```
 Notice that HEAD points to the commit you referred to but the subsequent commits and the pointer to the "buttons" branch are not displayed anymore. That's why it's called detached HEAD state. The changes you might apply at this stage will not go into "buttons" branch.
+
+Issue "git history" to view all branches, notice that "buttons" branch still points to the most recent commit:
+
+```
+git history
+```
 
 28. Refresh the browser tab - notice that buttons for Section 2 and Section 3 went back to the original color.
 
@@ -434,7 +445,7 @@ git commit -am "updated footer to 2021"
 git log
 ```
 
-32. Go back to the original HEAD 
+32. Go back to the original HEAD ("buttons" branch in our case):
 ```
 git checkout - 
 ```
@@ -443,13 +454,14 @@ or
 git checkout buttons
 ```
 
-Git emits a warning about the extra commit that is not connected to any of the branches. We can still create a new branch for that single commit, for easier reference, without switching to that branch.
+Before completing the operations git emits a warning about the extra commit that is not connected to any of the branches. We can still create a new branch for that single commit, for easier reference in the future, without switching to that branch. If we don't do it, this commit will remain in git database but no branch will be pointing to it. Let's create a new branch called "footer" and point it to the extra commit we just created:
+
 ```
 Git branch footer <sha>   
 ```
 where sha refers to the SHA ID for the commit called "updated footer to 2021"
 
-30. Notice our active branch is now "buttons". Visualize the status of all branches:
+33. Notice that our active branch is now "buttons". Visualize the status of all branches:
 ```
 git history
 ```
@@ -458,46 +470,46 @@ or
 gitk --all
 ```
 
-31. Refresh the browser tab and confirm all buttons have updated colors.
-32. Let's see how git helps restore deleted files. Remove *bootstrap.css* file from the */files* folder and confirm the file is no longer there:
+34. Refresh the browser tab and confirm all buttons have updated colors.
+35. Let's see how git helps restore deleted files. Remove *bootstrap.css* file from the */files* folder and confirm the file is no longer there:
 ```
 rm files/bootstrap.css
 
 ls files/bootstrap.css
 ```
-33. Refresh the browser tab and notice the page formatting is now broken.
-34. Issue ```git status``` and notice that git detected changes in the tracked files.
+36. Refresh the browser tab and notice the page formatting is now broken.
+37. Issue ```git status``` and notice that git detected changes in the tracked files.
 ```
 git status
 ```
-35. Let's commit those changes:
+38. Let's commit those changes:
 ```
 git commit -am "deleted bootstrap.css"
 ```
-36. Let's add a dummy commit just to move HEAD forward:
+39. Let's add a dummy commit just to move HEAD forward, to simulate a scenario where some other changes have been committed to the branch as well:
 ```
 git commit --allow-empty –m “dummy commit”
 git history
 ```
-37. Our webpage is broken and we want to investigate what changes were made to the bootstrap.css file in the past. Let's display the git log for that specific file only:
+40. Our webpage is broken and we want to investigate what changes were made to the bootstrap.css file in the past. Let's display the git log for that specific file only:
 ```
 git log -- files/bootstrap.css
 ```
-38. Now we know which commit is responsible for this change. Let's call it "bad commit". Git allows to go back and see what our page looked like **before that bad commit**. We can simply checkout the specific commit - this will put us in "detached HEAD" state.
-How do we know which commit we should refer to?  We can display "git log" and find the SHA ID of the commit added before the "bad commit" OR we can use a trick and refer to "one commit before":
+41. Now we know which commit is responsible for this change. Let's call it "bad commit". Git allows to go back and see what our page looked like **before that bad commit**. We can simply checkout the specific commit - this will put us in "detached HEAD" state.
+How do we know which commit we should refer to?  We can display "git log" and find the SHA ID of the commit added before the "bad commit" OR we can use a trick and refer to the "parent commit of the bad commit":
 ```
-git checkout <bad commit>~1
+git checkout <bad commit>^
 ```
-39. Refresh the browser tab. The page should look OK. At this point your local version of the project includes the deleted file. You can start a new branch from here if that fits your needs but we decide to go back to the active branch and revert the bad commit.
+42. Refresh the browser tab. The page should look OK. At this point your local version of the project includes the deleted file. You can start a new branch from here if that fits your needs but we decide to go back to the active branch and later on simply revert the bad commit.
 ```
 git checkout -
 ```
 
-40. Let's restore the deleted file. This is possible thanks to the way git tracks all changes in its database. We can use ```git revert``` command which effectively creates a new commit with reverted changes (you will be prompted to provide the commit message)
+43. Let's restore the deleted file. This is possible thanks to the way git tracks all changes in its database. We can use ```git revert``` command which effectively creates a new commit with reverted changes (you will be prompted to provide the commit message)
 ```
 git revert <bad commit>
 ```  
-41. Check the history of commits and refresh the browser tab to confirm the formatting is now correct.
+44. Check the history of commits and refresh the browser tab to confirm the formatting is now correct.
 ```
 git history
 ```
