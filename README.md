@@ -405,7 +405,7 @@ git log --oneline --graph --all
 ```
 26. Configure a new alias for a simple reference to this view
 ```
-git config --global alias.history “log --oneline --graph --all” 
+git config --global alias.history "log --oneline --graph --all" 
 ```
 From now on you can use the new alias instead the long command:
 ```
@@ -488,7 +488,7 @@ git commit -am "deleted bootstrap.css"
 ```
 39. Let's add a dummy commit just to move HEAD forward, to simulate a scenario where some other changes have been committed to the branch as well:
 ```
-git commit --allow-empty –m “dummy commit”
+git commit --allow-empty –m "dummy commit"
 git history
 ```
 40. Our webpage is broken and we want to investigate what changes were made to the bootstrap.css file in the past. Let's display the git log for that specific file only:
